@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name = "viewport" content= "width=device-width, initial-scale= 1.0" />
+    <title>Register - Nature Observation Portal</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+    <header>
+        <img src="../assets/images/logo.png" alt="Nature Observation Portal logo">
+        <h1>Nature Observation Portal</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+            <a href="wishlist.html">Wishlist</a>
+        </nav>
+    </header>
+    <main>
+        <section id="register">
+            <h2>Create Your Account</h2>
+            <form method="post" action="register-success.html" novalidate>
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required />
+                <span class="error" id="fullname-error"></span>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                <span class="error" id="email-error"></span>
+
+                <label for="mobilenumber">Telephone  Number</label>
+                <input type="tel" id ="mobilenumber" name="mobilenumber" placeholder="+49 152671369" required />
+                <span class="error" id="mobilenumber-error"></span>
+
+                <label for="dateofbirth">Date of Birth</label>
+                <input type="date" id="dateofbirth" name="dateofbirth" placeholder="01.01.2000" required />
+                <span class="error" id="dateofbirth-error"></span>
+
+                <label for="homepageurl">URL of Homepage</label>
+                <input type="url" id="homepageurl" name="homepageurl" placeholder="http://google.com" required />
+                <span class="error" id="homepageurl-error"></span>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Choose a username (Optional)" required />
+                <span class="error" id="username-error"></span>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder ="Create a password" required />
+                <span class="error" id="password-error"></span>
+
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required />
+                <span class="error" id="confirm-password-error"></span>
+                <div class="form-buttons">
+                    <button type="button" id="previewBtn" disabled>Preview</button>
+                    <button type="submit" id="submitBtn">Register</button>
+                </div>
+                <div id="previewContainer" style="display: none;"></div>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+        </nav>
+
+        <p>&copy; 2025 Nature Observation Portal. All rights reserved.</p>
+        <small>Developed for the Web Technologies and Programming course.</small>
+    </footer>
+    <script src="../scripts/register.js" defer></script>
+</body>
+</html>

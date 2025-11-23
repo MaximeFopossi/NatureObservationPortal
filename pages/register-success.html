@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Successful - Nature Observation Portal</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+    <header>
+        <img src="../assets/images/logo.png" alt="Nature Observation Portal logo">
+        <h1>Nature Observation Portal</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+            <a href="wishlist.html">Wishlist</a>
+        </nav>
+    </header>
+    <main>
+        <section id="register-success" style="text-align:center; padding:60px 20px;">
+            <h2>Registration Successful!</h2>
+            <p id="welcomeMessage" style="font-size:1.2em; margin-top:15px;"></p>
+
+            <p style="margin-top:30px;">
+                You can now <a href="login.html" style="color:#4a703a; font-weight:bold;">log in</a>
+                to your Nature Observation account.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+        </nav>
+
+        <p>&copy; 2025 Nature Observation Portal. All rights reserved.</p>
+        <small>Developed for the Web Technologies and Programming course.</small>
+    </footer>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Retrieve displayName from localStorage (set in register.js)
+      const displayName = localStorage.getItem("displayName");
+
+      // Reference to the message paragraph
+      const message = document.getElementById("welcomeMessage");
+
+      if (displayName) {
+        // Show personalized greeting
+        message.textContent = `Welcome, ${displayName}! We're happy to have you.`;
+        // Clear storage so it doesn't persist after refresh
+        localStorage.removeItem("displayName");
+      } else {
+        // Fallback message
+        message.textContent = "Welcome to the Nature Observation Portal!";
+      }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Nature Observation Portal</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+    <header>
+        <img src="../assets/images/logo.png" alt="Nature Observation Portal logo">
+        <h1>Nature Observation Portal</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Login</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+            <a href="wishlist.html">Wishlist</a>
+        </nav>
+    </header>
+    <main>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have questions, feedback, or want to report an issue, send us a message.</p>
+
+            <form method="post" action="contact-success.html">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Your full name" required />
+
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="email" placeholder="you@example.com" required />
+
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" name="subject" placeholder="Subject" required />
+
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" rows="6" placeholder="Write your message…" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+        </nav>
+        <p>&copy; 2025 Nature Observation Portal. All rights reserved.</p>
+        <small>Developed for the Web Technologies and Programming course.</small>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nature Observation Portal</title>
+    <link rel="stylesheet" href="styles/style.css" />
+
+</head>
+<body>
+    <header>
+        <img src="assets/images/logo.png" alt="Nature Observation Portal logo">
+        <h1>Nature Observation Portal</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="pages/register.html">Register</a>
+            <a href="pages/login.html">Login</a>
+            <a href="pages/contact.html">Contact</a>
+            <a href="pages/impressum.html">Impressum</a>
+            <a href="pages/wishlist.html">Wishlist</a>
+        </nav>
+    </header>
+    <main>
+        <section id="introduction">
+            <h2>Welcome to the Nature Observation Portal</h2>
+            <p>Search and browse observations from the community.</p>
+        </section>
+
+        <section id="search">
+            <input type="text" id="searchInput" placeholder="Search observations..." />
+            <button id="searchBtn" type="button">Search</button>
+        </section>
+
+        <section id="map">
+            <h2>Map</h2>
+            <div id="map-placeholder"></div>
+        </section>
+
+        <section id="observations">
+            <h2>Latest Observations</h2>
+            <!-- index.js injects cards here -->
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="pages/contact.html">Contact</a>
+            <a href="pages/impressum.html">Impressum</a>
+        </nav>
+
+        <p>&copy; 2025 Nature Observation Portal. All rights reserved.</p>
+        <small>Developed for the Web Technologies and Programming course.</small>
+    </footer>
+    <script defer src="scripts/utils.js"></script>
+    <script defer src="scripts/index.js"></script>
+</body>
+</html>
