@@ -1,32 +1,15 @@
 ﻿/* ===========================
    GLOBAL / BASE
  */
-body {                                  
-    font-family: 'Georgia', serif;                                  
-    background-color: #f9f8f3;                                      /* Beige page background */
-    color: #2f3e1c;                                                 /* Dark green-brown text color */
-    margin: 0;                                                      
-    padding: 0;                                                     
-    line-height: 1.6;                                               /* Line spacing */
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: #f9f8f3;                                              /* Beige page background */
+    color: #2f3e1c;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
 }
 
-.btn {
-    background-color: #5c8a4a;
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-    .btn:hover {
-        background-color: #4a703a;
-        transform: translateY(-2px);
-    }
 
 /* ===========================
    HEADER + NAVIGATION
@@ -140,13 +123,12 @@ footer {
     background-color: #f3f2eb;                                          /* Light neutral */
 }
 
-#map-placeholder {                                                      
-    background-color: #dce6d4;                                          /* Green-grey for future map area */
-    width: 80%;                                                         /* 80% of container width */
-    height: 300px;                                                      
-    margin: 20px auto;                                                  /* auto => center horizontally */
-    border-radius: 10px;                                                
-    border: 2px solid #c1c9b7;                                          
+#map-placeholder {
+    width: 100%;
+    height: 350px;
+    background-color: #dce6d4;
+    border-radius: 10px;
+    border: 2px solid #c1c9b7;
 }
 
 #observations {                                                         
@@ -160,12 +142,6 @@ footer {
         margin-bottom: 30px;                                            
     }
 
-
-#observations {                                                         
-    display: grid;                                                      /* Enable CSS grid (Side by side layout) */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));        /* repeaat => repeat a pattern of column width, auto-fit => automatically  fits many colums as possible (Responsive columns) */
-    gap: 25px;                                                          /* Space between grid items */
-}
 
     #observations article {                                             
         background-color: #f9f8f3;                                      /* Light card */
@@ -223,138 +199,29 @@ footer {
 /* ===========================
    LOGIN PAGE
 =========================== */
-#login {                                                                
-    display: flex;                                                      
-    flex-direction: column;                                             /* Column layout (title above form) */
-    align-items: center;                                            
-    justify-content: center;                                            
-    min-height: 70vh;                                                   /* Minimum height => 70% of Viewpoint height */
-    background-color: #f9f8f3;                                          
-    padding: 40px 20px;                                                 
+#login h2 {
+    color: #4d6e3b;
 }
-
-    #login h2 {                                                         
-        color: #4d6e3b;                                                 
-        margin-bottom: 20px;                                            
-    }
-
-    #login form {                                                       
-        background-color: #eef4eb;                                      /* Pale green */
-        border: 1px solid #c8d0c4;                                      
-        border-radius: 10px;                                            
-        padding: 30px 40px;                                             
-        width: 100%;                                                    
-        max-width: 400px;                                               
-        box-shadow: 2px 2px 10px rgba(0,0,0,.1);                        
-    }
-
-    #login label {                                                      
-        display: block;                                                 
-        margin-bottom: 5px;                                             
-        font-weight: bold;                                              
-        color: #2f3e1c;                                                 
-    }
-
-    #login input[type="text"],
-    #login input[type="password"] {                                     
-        width: 100%;                                                    
-        padding: 10px;                                                  
-        margin-bottom: 15px;                                            
-        border: 1px solid #a0b49d;                                     
-        border-radius: 5px;                                             
-    }
-
-    #login input[type="checkbox"] {                                     
-        margin-right: 8px;                                              
-    }
-
-    #login button {                                                     
-        background-color: #5c8a4a;                                      /* Brand green */
-        color: white;                                                   
-        border: none;                                                   
-        padding: 10px 15px;                                             
-        border-radius: 5px;                                             
-        cursor: pointer;                                                
-        font-weight: bold;                                              
-        width: 100%;                                                    
-    }
-
-        #login button:hover {                                           
-            background-color: #4a703a;                                  /* Darker green on hover */
-        }
-
 /* ===========================
    REGISTER PAGE
 =========================== */
-#register {                                                             
-    display: flex;                                                      /* Activates Flex Container*/
-    flex-direction: column;                                             /* Column layout */
-    align-items: center;                                                
-    justify-content: center;                                            
-    min-height: 80vh;                                                   
-    padding: 40px 20px;                                                 
-    background-color: #f9f8f3;                                          
+
+#register {
+    background-color: #f9f8f3;
+    padding: 40px 0;
 }
 
-    #register h2 {                                                      
-        color: #4d6e3b;                                                 /* Green */
-        margin-bottom: 25px;                                            
+    #register h2 {
+        color: #4d6e3b;
     }
 
-    #register form {                                                    
-        background-color: #eef4eb;                                      /* Pale green */
-        border: 1px solid #c8d0c4;                                      
-        border-radius: 10px;                                            
-        padding: 30px 40px;                                             
-        width: 100%;                                                    
-        max-width: 500px;                                               
-        box-shadow: 2px 2px 10px rgba(0,0,0,.1);                        
-    }
-
-    #register label {                                                   
-        display: block;                                                 
-        margin-bottom: 5px;                                             
-        font-weight: bold;                                              
-        color: #2f3e1c;                                                 
-    }
-
-    #register input[type="text"],
-    #register input[type="email"],
-    #register input[type="password"],
-    #register input[type="tel"],
-    #register input[type="date"],
-    #register input[type="url"] {
-        width: 100%;
-        box-sizing: border-box;                                           /* Include padding and border in element's total width */
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #a0b49d;
-        border-radius: 5px;
-        font-size: 1em;
-    }
-
-    #register .form-buttons {
-        display: flex;                                                   /* places buttons next to each other */
-        justify-content: center;                                        /* centers both buttons horizontally */
-        gap: 10px;                                                      /* space between them */
-        margin-top: 15px;
-    }
-
-    #register button {
-        background-color: #5c8a4a;                                       /* green color */
-        color: white;
-        border: none;
-        padding: 10px 25px;                                             /* wider but not full-width */
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        width: auto;                                                    /* <-- this stops full width stretch */
-        min-width: 120px;                                               /* ensures consistent button size */
-    }
-
-        #register button:hover {
-            background-color: #4a703a;                                  /* darker green on hover */
-        }
+/* Validation error messages */
+.error {
+    color: #b02a37; /* bootstrap danger red */
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 4px;
+}
 
 /* ===========================
    RESPONSIVE (MOBILE)
@@ -387,65 +254,14 @@ footer {
 /* ================================
    CONTACT PAGE
 ================================ */
-#contact {                                                              
-    max-width: 820px;                                                   
-    margin: 40px auto;                                                  
-    padding: 20px;                                                      
+#contact button.btn {
+    background-color: #5c8a4a;
+    border: none;
 }
 
-    #contact h2 {                                                       
-        color: #4d6e3b;                                                 /* Green */
-        text-align: center;                                             
-        margin-bottom: 10px;                                            
+    #contact button.btn:hover {
+        background-color: #4a703a;
     }
-
-    #contact p {                                                        
-        text-align: center;                                             
-        margin-bottom: 25px;                                            
-        color: #2f3e1c;                                                
-    }
-
-    #contact form {                                                     
-        background-color: #eef4eb;                                      /* Pale green */
-        border: 1px solid #c8d0c4;                                      
-        border-radius: 10px;                                            
-        padding: 30px 40px;                                             
-        box-shadow: 2px 2px 10px rgba(0,0,0,.1);                        
-    }
-
-    #contact label {                                                    
-        display: block;                                                 
-        margin-bottom: 6px;                                             
-        font-weight: bold;                                              
-        color: #2f3e1c;                                                 
-    }
-
-    #contact input[type="text"],
-    #contact input[type="email"],
-    #contact textarea {                                                  
-        width: 100%;                                                     
-        padding: 10px;                                                   
-        margin-bottom: 16px;                                             
-        border: 1px solid #a0b49d;                                       
-        border-radius: 5px;                                              
-        font-size: 1em;                                                  
-        background: #fffdf8;                                             
-    }
-
-    #contact button {                                                       
-        background-color: #5c8a4a;                                          /* Brand green */
-        color: white;                                                       
-        border: none;                                                       
-        padding: 12px 18px;                                                 
-        border-radius: 6px;                                                 
-        cursor: pointer;                                                
-        font-weight: bold;                                                  
-        width: 100%;                                                        
-    }
-
-        #contact button:hover {                                             
-            background-color: #4a703a;                                      /* Darker green */
-        }
 
 @media (max-width: 768px) {                                                 /* Contact page mobile */
     #contact {                                                              
@@ -460,214 +276,81 @@ footer {
 /* ================================
    IMPRESSUM PAGE
 ================================ */
-#impressum {                                                                
-    max-width: 800px;                                                       
-    margin: 40px auto;                                                      
-    padding: 20px 40px;                                                     
-    background-color: #fffdf8;                                              
-    border: 1px solid #e0ded5;                                              
-    border-radius: 10px;                                                    
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);                           
+#impressum {
+    padding: 40px 0;
 }
 
-    #impressum h2 {                                                         
-        color: #4d6e3b;                                                     /* Green */
-        text-align: center;                                                 
-        margin-bottom: 25px;                                                
+    #impressum h2 {
+        color: #4d6e3b;
+        margin-bottom: 25px;
     }
 
-    #impressum p {                                                          
-        margin-bottom: 20px;                                                
-        color: #2f3e1c;                                                     
-        line-height: 1.7;                                                   
+    #impressum p {
+        color: #2f3e1c;
+        line-height: 1.7;
+        margin-bottom: 1rem;
     }
 
-    #impressum strong {                                                     
-        color: #5c8a4a;                                                     /* Brand green */
+    #impressum strong {
+        color: #5c8a4a; /* brand green */
     }
 
-    #impressum em {                                                         
-        color: #4d6e3b;                                                     /* Dark green */
+    #impressum em {
+        color: #4d6e3b; /* dark green */
     }
-
-@media (max-width: 768px) {                                                 /* Impressum on mobile */
-    #impressum {
-        margin: 20px;                                                       
-        padding: 20px;                                                      
-    }
-}
 
 /* ================================
    DETAILS PAGE
 ================================ */
-#details {                                                                  
-    max-width: 1080px;                                                      
-    margin: 40px auto;                                                      
-    padding: 0 20px;                                                        
+#details {
+    padding: 40px 0;
 }
 
-    #details .breadcrumb {                                                  
-        margin: 0 0 10px;                                                  
-        color: #2f3e1c;                                                     
-        font-size: 0.95em;                                                  
-    }
-
-        #details .breadcrumb a {                                            
-            color: #4a703a;                                                 /* Green links */
-            text-decoration: none;                                          
-        }
-
-            #details .breadcrumb a:hover {                                  
-                text-decoration: underline;                                 
-            }
-
-    #details h2 {                                                           
-        color: #4d6e3b;                                                     /* Green */
-        text-align: center;                                                
-        margin: 10px 0 20px;                                                
-    }
-
-.details-figure {                                                           
-    background: #fffdf8;                                                    
-    border: 1px solid #e0ded5;                                             
-    border-radius: 12px;                                                    
-    overflow: hidden;                                                       /* Clip image corners to radius */
-    box-shadow: 2px 2px 10px rgba(0,0,0,.06);                               
-    margin: 0 auto 24px;                                                    
-    max-width: 960px;                                                       
+/* Big image at top */
+.details-figure {
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0 auto 24px;
 }
 
-    .details-figure img {                                                  
-        width: 100%;                                                        
-        height: 420px;                                                      
-        object-fit: cover;                                                  
-        display: block;                                                     
+    .details-figure img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        display: block;
     }
 
-    .details-figure figcaption {                                            
-        padding: 10px 14px;                                                 
-        color: #2f3e1c;                                                     
-        background: #f3f2eb;                                                
-        border-top: 1px solid #e0ded5;                                      
+    .details-figure figcaption {
+        padding: 10px 14px;
+        background: #f8f9fa; /* light Bootstrap gray */
+        font-size: 0.9rem;
     }
 
-.details-content {                                                          
-    display: grid;                                                          
-    grid-template-columns: 320px 1fr;                                       
-    gap: 24px;                                                              
+/* Headings in the two columns */
+.details-meta h3,
+.details-description h3 {
+    color: #4d6e3b;
+    margin-top: 0;
 }
 
-.details-meta,
-.details-description {                                                     
-    background: #eef4eb;                                                    /* Pale green */
-    border: 1px solid #c8d0c4;                                              
-    border-radius: 10px;                                                    
-    padding: 18px 20px;                                                     
-    box-shadow: 2px 2px 10px rgba(0,0,0,.05);                               
+/* Let Bootstrap .table do most of the styling */
+.details-table {
+    margin-top: 12px;
 }
 
-    .details-meta h3,
-    .details-description h3 {                                               
-        color: #4d6e3b;                                                     /* Green */
-        margin-top: 0;                                                      
-    }
-
-    .details-meta dl {                                                      
-        display: grid;                                                      
-        grid-template-columns: 120px 1fr;                                   /* Column for term + column for value */
-        row-gap: 8px;                                                       /* Vertical spacing between rows */
-        column-gap: 12px;                                                   /* Horizontal space between columns */
-        margin: 0;                                                         
-    }
-
-    .details-meta dt {                                                      
-        font-weight: bold;                                                  
-        color: #2f3e1c;                                                     
-    }
-
-    .details-meta dd {
-        margin: 0;
-        color: #2f3e1c;                                                     
-    }
-
-.details-table {                                                            
-    width: 100%;                                                            
-    border-collapse: collapse;                                              /* Merge borders */
-    margin-top: 12px;                                                       
-    background: #fffdf8;                                                    
-    border: 1px solid #e0ded5;                                             
-    border-radius: 8px;                                                     
-    overflow: hidden;                                                       /* Clip header to radius */
+/* Action area */
+.details-actions .btn {
+    min-width: 160px;
 }
 
-    .details-table th,
-    .details-table td {                                                     
-        padding: 10px 12px;                                                 
-        border-bottom: 1px solid #e0ded5;                                  
-        text-align: left;                                                  
-        color: #2f3e1c;                                                     
-    }
-
-    .details-table thead th {                                                
-        background: #eef4eb;                                                /* Pale green header bar */
-        color: #4d6e3b;                                                     /* Green header text */
-    }
-
-    .details-table tbody tr:last-child td {                                 /* Remove last row bottom border */
-        border-bottom: none;                                                /* Clean bottom edge */
-    }
-
-.details-actions {                                                          
-    grid-column: 1 / -1;                                                    /* Span both grid columns */
-    display: flex;                                                          
-    justify-content: center;                                                /* Center horizontally */
-    align-items: center;                                                    /* Align items vertically */
-    gap: 12px;                                                              /* Space between the two buttons */
-    margin-top: 20px;                                                      
-    flex-wrap: wrap;                                                        /* Allow wrapping to new line */
+.details-actions .link-back {
+    color: #4a703a;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-    .details-actions .btn {                                                 
-        line-height: 1.1;                                                   /* Compact line height inside buttons */
-    }
-
-    .details-actions .link-back {
-        flex-basis: 100%;                                                   /* Force link onto its own full-width line */
-        text-align: center;                                                 
-        margin-top: 10px;                                                   
-        color: #4a703a;                                                     /* Green link color */
-        text-decoration: none;                                              
-        font-weight: bold;                                                
-    }
-
-        .details-actions .link-back:hover {                                 
-            text-decoration: underline;                                     
-        }
-
-.btn {
-    background-color: #5c8a4a;                                               /* Brand green background */
-    color: #fff;                                                             
-    border: none;                                                           
-    padding: 10px 16px;                                                     
-    border-radius: 6px;                                                    
-    cursor: pointer;                                                        
-    text-decoration: none;                                                  
-    font-weight: bold;                                                      
-    display: inline-block;                                                  
-}
-
-    .btn:hover {                                                            
-        background-color: #4a703a;                                          /* Darker green on hover */
-    }
-
-.link-back {
-    color: #4a703a;                                                         /* Green link color */
-    text-decoration: none;                                                  
-    font-weight: bold;                                                      
-}
-
-    .link-back:hover {                                                      
-        text-decoration: underline;                                         
+    .details-actions .link-back:hover {
+        text-decoration: underline;
     }
 
 @media (max-width: 768px) {                                                 /* Details page mobilek for buttons */

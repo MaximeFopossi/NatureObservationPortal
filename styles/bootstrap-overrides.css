@@ -1,0 +1,60 @@
+﻿/* keep brand green for .btn-primary */
+.btn-primary {
+    background-color: #5c8a4a;
+    border-color: #5c8a4a;
+}
+
+    .btn-primary:hover {
+        background-color: #4a703a;
+        border-color: #4a703a;
+    }
+
+/* tweak container width or headings if desired. Keep this file small. */
+
+/* Bootstrap brand overrides*/
+
+:root {
+    --nop-green: #5c8a4a;
+    --nop-green-dark: #4a703a;
+}
+
+/* PRIMARY BUTTONS (Search, Register, Add to wishlist, etc.) */
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--nop-green) !important;
+    border-color: var(--nop-green) !important;
+    color: #fff !important;
+}
+
+    .btn-primary:hover {
+        background-color: var(--nop-green-dark) !important;
+        border-color: var(--nop-green-dark) !important;
+    }
+
+/* OUTLINE PRIMARY (Highlight on Map, etc.) */
+.btn-outline-primary,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    color: var(--nop-green) !important;
+    border-color: var(--nop-green) !important;
+    background-color: transparent !important;
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--nop-green) !important;
+        color: #fff !important;
+    }
+
+/* Make buttons slightly rounded like the rest of the design */
+.btn {
+    border-radius: 6px;
+}
+
+/* Shared card look (index & wishlist cards) */
+.card,
+.wishlist-card {
+    border-radius: 10px;
+    border: 1px solid #e0ded5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

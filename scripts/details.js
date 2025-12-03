@@ -1,114 +1,133 @@
 ﻿console.log("details.js loaded");
 (function () {
-    // utils.js to be loaded first
-    if (!window.NOP_DATA && typeof getObservationById !== 'function') {
-        console.error('utils.js did not load.');
+    const root = document.querySelector("#details");
+    if (!root) return;
+
+    // The demo data from utils.js
+    if (!window.NOP_DATA) {
+        console.error("details.js: NOP_DATA not found (utils.js missing?)");
         return;
     }
 
-    // Grab DOM targets that  HTML provides
-    const root = document.querySelector('#details');
-    const breadcrumbEl = root.querySelector('.breadcrumb');
-    const titleEl = root.querySelector('h2');
-    const imgEl = root.querySelector('.details-figure img');
-    const figcapEl = root.querySelector('.details-figure figcaption');
-    const dlEl = root.querySelector('.details-meta dl');
-    const tbodyEl = root.querySelector('.details-table tbody');
-    const addBtn = root.querySelector('#addWishlistBtn');
-    const backLink = root.querySelector('#backLink');                                           // capital L
+    // Grab DOM elements
+    const breadcrumbEl = root.querySelector(".breadcrumb");
+    const titleEl = root.querySelector("h2");
+    const imgEl = root.querySelector(".details-figure img");
+    const figcapEl = root.querySelector(".details-figure figcaption");
+    const dlEl = root.querySelector(".details-meta dl");
+    const tbodyEl = root.querySelector(".details-table tbody");
+    const addBtn = root.querySelector("#addWishlistBtn");
+    const backLink = root.querySelector("#backLink");
 
-    // Read ?id=...
-    const id = new URLSearchParams(location.search).get('id');
-    if (!id) {
-        breadcrumbEl.textContent = 'Missing observation id.';
-        titleEl.textContent = 'Observation not found';
+    // Read ?id=... from the URL 
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id || !NOP_DATA[id]) {
+        // Fallback if id is missing or unknown
+        breadcrumbEl.innerHTML =
+            `<a href="../index.html">Home</a> &raquo; Observations &raquo; Details`;
+        titleEl.textContent = "Observation not found";
+        figcapEl.textContent = `No data for "${id || "unknown"}".`;
         return;
     }
 
-    // Pull data from either NOP_DATA or OBSERVATIONS helpers
-    const data =
-        (window.NOP_DATA && window.NOP_DATA[id]) ||
-        (typeof getObservationById === 'function' ? getObservationById(id) : null);
+    const data = NOP_DATA[id];
 
-    if (!data) {
-        breadcrumbEl.innerHTML = `<a href="../index.html">Home</a> & raquo; Observations & raquo; Details`;
-        titleEl.textContent = 'Observation not found';
-        figcapEl.textContent = `No data for "${id}"`;
-    return;
-    }
+    // Fills in  basic info  (text / image)
+    breadcrumbEl.innerHTML =
+        `<a href="../index.html">Home</a> &raquo; 
+         <a href="../index.html#observations">Observations</a> &raquo; Details`;
 
-    // Normalize fields regardless of source shape
-    const title = data.title || 'Observation';
-    const img = data.img || data.image || '';
-    const caption = data.caption || data.summary || '';
+    const title = data.title || "Observation";
+    const caption = data.caption || data.summary || "";
 
-    const info = data.info || {
-        species: data.species || '',
-        date: data.date || '',
-        location: data.location || '',
-        observer: data.observer || '',
-        tags: Array.isArray(data.tags) ? data.tags.join(', ') : (data.tags || '')
-    };
-
-    const summaryRows = Array.isArray(data.summary)
-        ? data.summary
-        : [];                                                                               // ? ok if empty
-
-    // Image path 
-    const imgPath = /^(?:\.\.\/|https?:\/\/|\/)/i.test(img) ? img : ('../' + img.replace(/^\.?\/*/, ''));
-
-    // Fills the UI
-    breadcrumbEl.innerHTML = `<a href="../index.html">Home</a> & raquo; <a href="../index.html#observations">Observations</a> & raquo; Details`;
     titleEl.textContent = title;
-    imgEl.src = imgPath;
+    imgEl.src = data.img;
     imgEl.alt = title;
-    figcapEl.textContent = caption || '';
+    figcapEl.textContent = caption;
 
-    // Builds the dl 
-    dlEl.innerHTML = '';
+    // Builds the definition list (Observation Info)
+    dlEl.innerHTML = "";
+
+    const info = data.info || {};
     const rows = [
-        ['Species', info.species],
-        ['Date', info.date],
-        ['Location', info.location],
-        ['Observer', info.observer],
-        ['Tags', info.tags],
+        ["Species", info.species || ""],
+        ["Date", info.date || ""],
+        ["Location", info.location || ""],
+        ["Observer", info.observer || ""],
+        ["Tags", info.tags || ""]
     ];
-    rows.forEach(([dt, dd]) => {
-        const dtEl = document.createElement('dt'); dtEl.textContent = dt;
-        const ddEl = document.createElement('dd');
-        if (dt === 'Date' && info.date) {
-            const t = document.createElement('time');
-            t.dateTime = info.date.slice(0, 10);
-            t.textContent = info.date;
+
+    rows.forEach(([dtText, ddText]) => {
+        const dtEl = document.createElement("dt");
+        dtEl.textContent = dtText;
+
+        const ddEl = document.createElement("dd");
+
+        if (dtText === "Date" && ddText) {
+            const t = document.createElement("time");
+            // ISO style (YYYY-MM-DD )
+            t.dateTime = ddText.slice(0, 10);
+            t.textContent = ddText;
             ddEl.appendChild(t);
         } else {
-            ddEl.textContent = dd || '';
+            ddEl.textContent = ddText;
         }
+
         dlEl.append(dtEl, ddEl);
     });
 
     // Builds the summary table
-    tbodyEl.innerHTML = '';
-    summaryRows.forEach(([k, v]) => {
-        const tr = document.createElement('tr');
-        const tdK = document.createElement('td'); tdK.textContent = k;
-        const tdV = document.createElement('td'); tdV.textContent = v;
-        tr.append(tdK, tdV);
+    tbodyEl.innerHTML = "";
+    const summaryRows = Array.isArray(data.summary) ? data.summary : [];
+    summaryRows.forEach(([prop, val]) => {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        const td2 = document.createElement("td");
+        td1.textContent = prop;
+        td2.textContent = val;
+        tr.append(td1, td2);
         tbodyEl.appendChild(tr);
     });
 
-    // Wishlist button (uses utils.js -> window.Wishlist)
+    // Wishlist button (uses window.Wishlist) ---
     if (window.Wishlist && addBtn) {
         const syncBtn = () => {
             const saved = Wishlist.has(id);
-            addBtn.textContent = saved ? '✓ In Wishlist' : 'Add to Wishlist';
-            addBtn.setAttribute('aria-pressed', String(saved));
+            addBtn.textContent = saved ? "✓ In Wishlist" : "Add to Wishlist";
+            addBtn.setAttribute("aria-pressed", String(saved));
         };
         syncBtn();
-        addBtn.addEventListener('click', () => {
+        addBtn.addEventListener("click", () => {
             Wishlist.toggle(id);
             syncBtn();
         });
     }
 
+    //  jQuery
+    if (window.jQuery) {
+        const $ = window.jQuery;
+
+        // Fade in the info + description area
+        $(".details-content").hide().fadeIn(250);
+
+        // Small pulse animation on the wishlist button
+        if (addBtn) {
+            const $btn = $(addBtn);
+            $btn.on("click", function () {
+                // quick pulse
+                $btn
+                    .stop(true, true)
+                    .animate({ opacity: 0.7 }, 100)
+                    .animate({ opacity: 1 }, 100);
+            });
+        }
+
+        // Hover effect on "Highlight on Map" (stronger shadow)
+        $("#highlightBtn").hover(
+            function () { $(this).addClass("shadow-sm"); },
+            function () { $(this).removeClass("shadow-sm"); }
+        );
+    }
 })();
