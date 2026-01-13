@@ -63,11 +63,44 @@
             <!-- Observation Card -->
             <div class="col-lg-8 mb-4 mb-lg-0">
                 <section id="observations">
-                    <h2 class="mb-4 text-center text-lg-start">Latest Observations</h2>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h2 class="m-0">Latest Observations</h2>
+
+                        <div class="d-flex gap-2">
+                            <a href="pages/add.html" class="btn btn-outline-primary btn-sm">
+                                + Add observation
+                            </a>
+                            <button id="exportBtn" type="button" class="btn btn-outline-success btn-sm">
+                                Export visible tiles (JSON)
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <!-- Data source toggle (Demo vs Backend) -->
+                    <div class="d-flex justify-content-end mb-3">
+                        <select id="dataSource"
+                                class="form-select form-select-sm"
+                                style="max-width: 280px;">
+                            <option value="local" selected>Local backend (Express)</option>
+                            <option value="api">iNaturalist API</option>
+                        </select>
+
+                    </div>
+
+                    <div id="exportStatus" class="small text-muted mb-2"></div>
                     <div id="observations-row" class="row g-4">
                         <!-- index.js injects card columns here -->
                     </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button id="loadMoreBtn" type="button" class="btn btn-outline-primary btn-sm">
+                            Load more
+                        </button>
+
+                    </div>
+
                 </section>
+
             </div>
 
             <!-- Leaflet Map -->

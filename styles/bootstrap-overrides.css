@@ -1,24 +1,34 @@
-﻿/* keep brand green for .btn-primary */
+﻿/* Bootstrap Overrides for Nature Observation Portal
+   Keep Bootstrap defaults
+   Adjust brand colors and visual identity
+   Keep this file small and focused */
+
+/* PRIMARY BUTTON (Bootstrap .btn-primary) 
+    Override default Bootstrap primary button colors to match brand identity.
+*/
+/* Default state */
 .btn-primary {
-    background-color: #5c8a4a;
+    background-color: #5c8a4a;                                                  /* brand green */
     border-color: #5c8a4a;
 }
-
+    /* Hover state */
     .btn-primary:hover {
-        background-color: #4a703a;
+        background-color: #4a703a;                                              /* darker green on hover */
         border-color: #4a703a;
     }
 
-/* tweak container width or headings if desired. Keep this file small. */
-
+/* CSS VARIABLES (Design Tokens) */
 /* Bootstrap brand overrides*/
 
 :root {
-    --nop-green: #5c8a4a;
-    --nop-green-dark: #4a703a;
+    --nop-green: #5c8a4a;                                                       /* main brand green */
+    --nop-green-dark: #4a703a;                                                  /* darker variant for hover states */
 }
 
-/* PRIMARY BUTTONS (Search, Register, Add to wishlist, etc.) */
+/* PRIMARY BUTTONS (Search, Register, Add to wishlist, etc.) 
+   override all important button states so Bootstrap does not reapply its default colors.
+*/
+
 .btn-primary,
 .btn-primary:focus,
 .btn-primary:active {
@@ -26,13 +36,15 @@
     border-color: var(--nop-green) !important;
     color: #fff !important;
 }
-
+    /* Hover state for primary buttons */
     .btn-primary:hover {
         background-color: var(--nop-green-dark) !important;
         border-color: var(--nop-green-dark) !important;
     }
 
-/* OUTLINE PRIMARY (Highlight on Map, etc.) */
+/* OUTLINE PRIMARY (Highlight on Map, etc.) 
+    Buttons have a transparent background by default and turn green on hover.
+*/
 .btn-outline-primary,
 .btn-outline-primary:focus,
 .btn-outline-primary:active {
@@ -40,21 +52,29 @@
     border-color: var(--nop-green) !important;
     background-color: transparent !important;
 }
-
+    /* Hover state for outline primary buttons */
     .btn-outline-primary:hover {
         background-color: var(--nop-green) !important;
         color: #fff !important;
     }
 
-/* Make buttons slightly rounded like the rest of the design */
+/* 
+   BUTTON SHAPE
+   Slightly round all buttons to match the overall design of the portal.
+*/
 .btn {
     border-radius: 6px;
 }
 
-/* Shared card look (index & wishlist cards) */
+/* 
+   SHARED CARD DESIGN
+   These styles are applied to:
+   - observation cards on the index page
+   - wishlist cards
+*/
 .card,
 .wishlist-card {
-    border-radius: 10px;
-    border: 1px solid #e0ded5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;                                                                /* rounded corners */
+    border: 1px solid #e0ded5;                                                          /* subtle border */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);                                          /* soft shadow */
 }

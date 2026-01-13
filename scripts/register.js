@@ -1,4 +1,5 @@
-// --- Grab elements ---
+// GRAB FORM ELEMENTS
+// select the form and all input elements to validate.
 const form = document.querySelector('#register form');
 const previewBtn = document.getElementById('previewBtn');
 const submitBtn = document.getElementById('submitBtn');
@@ -10,29 +11,28 @@ const urlInput = document.getElementById('homepageurl');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const confirmInput = document.getElementById('confirm-password');
-
-const previewContainer = document.getElementById('previewContainer');
-
-// Defensive check
-if (!form) {
+const previewContainer = document.getElementById('previewContainer');                   // Container used for preview mode
+if (!form) {                                                                            // Ensure the form exists on this page
     console.error('register.js: #register form not found.');
 }
 
-// --- Bootstrap-style helpers ---
-
+// BOOTSTRAP VALIDATION HELPERS
+// // Finds the .invalid-feedback element associated with an input.
+// Bootstrap usually places this inside the same .mb-3 wrapper.
 function getInvalidFeedback(input) {
-    // look in the same .mb-3 block
-    const parent = input.closest('.mb-3') || input.parentElement;
+    const parent = input.closest('.mb-3') || input.parentElement;                       
     if (!parent) return null;
     return parent.querySelector('.invalid-feedback');
 }
 
+// Resets validation state: removes green/red borders and messages
 function resetFeedback(input) {
     input.classList.remove('is-valid', 'is-invalid');
     const feedback = getInvalidFeedback(input);
     if (feedback) feedback.textContent = '';
 }
 
+// Marks an input as invalid and shows an error message
 function setError(input, message) {
     input.classList.remove('is-valid');
     input.classList.add('is-invalid');
@@ -40,6 +40,7 @@ function setError(input, message) {
     if (feedback) feedback.textContent = message;
 }
 
+// Marks an input as valid (green border) and clears errors
 function setSuccess(input) {
     input.classList.remove('is-invalid');
     input.classList.add('is-valid');
@@ -47,12 +48,11 @@ function setSuccess(input) {
     if (feedback) feedback.textContent = ''; 
 }
 
-// --- Field validators (return true/false) ---
-
+// FIELD VALIDATORS
+// Each function validates one field and returns true/false
 function validateFullName() {
     const v = fullNameInput.value.trim();
-    // Expect "Lastname, Firstname"
-    const re = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+,\s*[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;
+    const re = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+,\s*[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/;                          // Full name must follow "Lastname, Firstname"
     if (!v) {
         setError(fullNameInput, 'Full name is required (e.g., "Muster, Max").');
         return false;
@@ -65,6 +65,7 @@ function validateFullName() {
     return true;
 }
 
+// Standard email validation using regex
 function validateEmail() {
     const v = emailInput.value.trim();
     const re = /^[a-zA-Z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}$/;
@@ -82,8 +83,7 @@ function validateEmail() {
 
 function validatePhone() {
     const v = phoneInput.value.trim();
-    // Example formats: +49 1526 123456  or +49-1526-123456
-    const re = /^\+\d{1,3}([ -]?\d{2,5}){2,}$/;
+    const re = /^\+\d{1,3}([ -]?\d{2,5}){2,}$/;                         // International phone number validation,  Example formats: +49 1526 123456 
     if (!v) {
         setError(phoneInput, 'Telephone number is required.');
         return false;
@@ -97,7 +97,7 @@ function validatePhone() {
 }
 
 function validateDob() {
-    const v = dobInput.value; // type="date" => "YYYY-MM-DD"
+    const v = dobInput.value;                                       // Date of birth validation + age check (type="date" => "YYYY-MM-DD" ) 
     if (!v) {
         setError(dobInput, 'Date of birth is required.');
         return false;
@@ -107,7 +107,7 @@ function validateDob() {
         setError(dobInput, 'Please pick a valid date.');
         return false;
     }
-    // must be >= 18 years old
+    // User must be at least 18 years old
     const today = new Date();
     let age = today.getFullYear() - dob.getFullYear();
     const m = today.getMonth() - dob.getMonth();
@@ -124,7 +124,7 @@ function validateDob() {
 
 function validateUrl() {
     const v = urlInput.value.trim();
-    const re = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/i;
+    const re = /^(https?:\/\/)[^\s/$.?#].[^\s]*$/i;                         // Homepage URL must be a valid http/https URL
     if (!v) {
         setError(urlInput, 'Homepage URL is required.');
         return false;
@@ -137,25 +137,23 @@ function validateUrl() {
     return true;
 }
 
-function validateUsername() {
+function validateUsername() {                                              // Username is optional, but must match rules if provided
     const v = usernameInput.value.trim();
-
-    // no username = valid & neutral (no green check)
+    // Optional field: empty is allowed
     if (!v) {
         resetFeedback(usernameInput);
         return true;
     }
-
     const re = /^[A-Za-z0-9_]{3,20}$/;
     if (!re.test(v)) {
         setError(usernameInput, 'Optional. If used, 3–20 letters, numbers, or underscore.');
         return false;
     }
-
     setSuccess(usernameInput);
     return true;
 }
 
+// Password must be at least 8 characters
 function validatePassword() {
     const v = passwordInput.value;
     if (!v) {
@@ -170,6 +168,7 @@ function validatePassword() {
     return true;
 }
 
+// Confirmation password must match the original password
 function validateConfirm() {
     const v = confirmInput.value;
     if (!v) {
@@ -184,8 +183,7 @@ function validateConfirm() {
     return true;
 }
 
-// --- validate all + toggle buttons ---
-
+// VALIDATE ENTIRE FORM
 function validateForm() {
     const a = validateFullName();
     const b = validateEmail();
@@ -195,17 +193,14 @@ function validateForm() {
     const f = validateUsername();
     const g = validatePassword();
     const h = validateConfirm();
-
     const allValid = a && b && c && d && e && f && g && h;
-
+    // Enable/disable preview and submit buttons based on overall validity
     if (previewBtn) previewBtn.disabled = !allValid;
     if (submitBtn) submitBtn.disabled = !allValid;
-
     return allValid;
 }
 
-// --- live validation ---
-
+// LIVE VALIDATION EVENTS
 [
     [fullNameInput, validateFullName],
     [emailInput, validateEmail],
@@ -217,21 +212,24 @@ function validateForm() {
     [confirmInput, validateConfirm],
 ].forEach(([input, fn]) => {
     if (!input) return;
+    // Validate on input (live typing)
     input.addEventListener('input', () => {
         fn();
         validateForm();
     });
+    // Validate again on blur (leaving field)
     input.addEventListener('blur', () => {
         fn();
         validateForm();
     });
 });
 
-// --- submit guard ---
-
+// FORM SUBMISSION GUARD
 form.addEventListener('submit', (e) => {
     if (!validateForm()) {
+        // Prevent submission if form is invalid
         e.preventDefault();
+        // Focus and scroll to the first invalid field
         const firstInvalid = form.querySelector('.is-invalid');
         if (firstInvalid) {
             firstInvalid.focus();
@@ -239,25 +237,27 @@ form.addEventListener('submit', (e) => {
         }
     } else {
         // If user submits directly (without preview), still store displayName
+        // Store display name in localStorage for later use
         const displayName = usernameInput.value.trim() || fullNameInput.value.trim();
         localStorage.setItem("displayName", displayName);
     }
 });
 
 console.log('Bootstrap validation ready');
-
 // PREVIEW MODE HANDLER
-
+// Returns all form children except the preview container
 function getFormChildrenExceptPreview() {
     return Array.from(form.children).filter(el => el !== previewContainer);
 }
 
+// Show preview of entered data
+// Shows a preview of the entered data before final submission
 function showPreview() {
     if (!validateForm()) {
         alert("Please fix the errors before previewing.");
         return;
     }
-
+    // Build preview HTML dynamically
     const html = `
       <h3>Preview Your Details</h3>
       <ul class="list-group text-start mb-3">
@@ -279,25 +279,25 @@ function showPreview() {
         <button type="submit" id="confirmBtn" class="btn btn-primary">Confirm & Submit</button>
       </div>
     `;
-
     previewContainer.innerHTML = html;
 
-    // Hide form fields (but not preview container)
+    // Hide all other form elements
+    // Show only the preview container
     getFormChildrenExceptPreview().forEach(el => {
         el.style.display = "none";
     });
-
     previewContainer.style.display = "block";
-
+    // Attach event listeners to Edit and Confirm buttons
+    // Switch back to edit mode
     document.getElementById('editBtn').addEventListener('click', showEditMode);
-
-    document.getElementById('confirmBtn').addEventListener('click', () => {
+    document.getElementById('confirmBtn').addEventListener('click', () => {                     // On confirm, submit the form
         const displayName = usernameInput.value.trim() || fullNameInput.value.trim();
         localStorage.setItem("displayName", displayName);
         form.submit();
     });
 }
 
+// Switch back to edit mode from preview
 function showEditMode() {
     previewContainer.style.display = "none";
     getFormChildrenExceptPreview().forEach(el => {

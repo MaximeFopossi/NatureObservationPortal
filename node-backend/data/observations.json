@@ -1,0 +1,35 @@
+[
+  {
+    "id": "obs-mkd2w4gc-uymh23",
+    "title": "Red Fox",
+    "latinName": "Vulpes vulpes",
+    "location": "Central Forest",
+    "date": "2026-01-13",
+    "tags": [],
+    "lat": 52.51,
+    "lng": 13.42,
+    "createdAt": "2026-01-13T21:02:55.117Z"
+  },
+  {
+    "id": "obs-mkd3ea8s-ackkct",
+    "title": "European Robin",
+    "latinName": "Erithacus rubecula",
+    "location": "Neuköln, Berlin",
+    "date": "2026-01-13",
+    "tags": [],
+    "lat": 52.5159,
+    "lng": 13.3777,
+    "createdAt": "2026-01-13T21:17:02.429Z"
+  },
+  {
+    "id": "obs-mkd4b72v-ahqgj5",
+    "title": "European Hedgehog",
+    "latinName": "Erinaceus europaues",
+    "location": "Tiergarten, Berlin",
+    "date": "2026-01-13",
+    "tags": [],
+    "lat": 52.5146,
+    "lng": 13.3501,
+    "createdAt": "2026-01-13T21:42:37.976Z"
+  }
+]

@@ -1,4 +1,6 @@
 ﻿console.log("utils.js loaded");
+// Mock Dataset for Nature Observation Project (NOP)
+// Array represents observation data.
 const OBSERVATIONS = [
     {
         id: "robin",
@@ -111,36 +113,41 @@ const OBSERVATIONS = [
 
 ];
 
-// --- Read-only data accessors ---
-function getAllObservations() {
+//  Read-only data functions
+// These functions provide access to the OBSERVATIONS dataset.
+function getAllObservations() {                                         
     return OBSERVATIONS;
 }
 
+// Get a single observation by its ID
 function getObservationById(id) {
-    return OBSERVATIONS.find(o => o.id === id) || null;
+    return OBSERVATIONS.find(o => o.id === id) || null;                
 }
 
-// --- Wishlist helpers (localStorage) ---
+// Wishlist storage (localStorage)
+// Key used in localStorage
 const WL_KEY = "nop_wishlist";
 
-/** Load wishlist as a Set<string> of ids */
-function loadWishlist() {
+// Load wishlist from localStorage and return  as a Set of IDs.
+function loadWishlist() {                                              
     try {
         const raw = localStorage.getItem(WL_KEY);
-        if (!raw) return new Set();
-        const arr = JSON.parse(raw);
-        return new Set(Array.isArray(arr) ? arr : []);
+        if (!raw) return new Set();                                     // No data yet
+        const arr = JSON.parse(raw);                                    // Parse stored JSON string back into an array
+        return new Set(Array.isArray(arr) ? arr : []);                  // Convert array to Set
     } catch {
-        return new Set();
+        return new Set();                                               // On error, return empty Set
     }
 }
 
-/** Save Set<string> back to localStorage */
+// Save the wishlist Set back into localStorage.
+// Because localStorage only stores strings, convert: Set -> Array -> JSON string
 function saveWishlist(set) {
     localStorage.setItem(WL_KEY, JSON.stringify([...set]));
 }
 
-/** Toggle presence of id; returns new Set */
+// Toggle wishlist status for given id; returns updated Set
+// If the ID exists, it is removed; otherwise it is added.
 function toggleWishlist(id) {
     const set = loadWishlist();
     if (set.has(id)) set.delete(id);
@@ -149,12 +156,15 @@ function toggleWishlist(id) {
     return set;
 }
 
-/** Bool: is id saved? */
+// Check if given id is in the wishlist
 function isInWishlist(id) {
     return loadWishlist().has(id);
 }
 
-// Demo data used across pages
+
+// Detail Page  (Global Access)
+// This object contains extended information for detail pages.
+// It is attached to window so other scripts can access it globally.
 window.NOP_DATA = {
     fox: {
         id: "fox",
@@ -354,33 +364,35 @@ window.NOP_DATA = {
     }
 };
 
-// Wishlist helpers (public API over localStorage helpers)
+
+// WISHLIST PUBLIC API
+// This object exposes a clean interface for wishlist operations.
+// UI code uses this instead of directly accessing localStorage.
 window.Wishlist = {
-    /** Array of saved IDs */
+    // Get all saved IDs as an array
     getAll() {
         return [...loadWishlist()];
     },
-
-    /** Is this ID saved? */
+    // Check if given id is in wishlist
     has(id) {
         return isInWishlist(id);
     },
 
-    /** Add explicitly */
+    // Explicitly add an ID to the wishlist
     add(id) {
         const set = loadWishlist();
         set.add(id);
         saveWishlist(set);
     },
 
-    /** Remove explicitly */
+    // Explicitly remove an ID from the wishlist
     remove(id) {
         const set = loadWishlist();
         set.delete(id);
         saveWishlist(set);
     },
 
-    /** Toggle on/off; returns true if now saved */
+    // Toggle wishlist status for given id; returns true if added, false if removed
     toggle(id) {
         const had = isInWishlist(id);
         toggleWishlist(id);

@@ -1,23 +1,27 @@
 (function () {
-    const listBox = document.getElementById("wishlist-list");                       // <div id="wishlist-list"></div>
-    const emptyBox = document.getElementById("wishlist-empty");                     // <div id="wishlist-empty">…</div>
-
-    if (!listBox || !emptyBox) {
+    // GET REQUIRED DOM ELEMENTS
+    const listBox = document.getElementById("wishlist-list");                                 // Container where wishlist cards will be rendered
+    const emptyBox = document.getElementById("wishlist-empty");                               // Placeholder shown when the wishlist is empty => <div id="wishlist-empty">…</div>
+    if (!listBox || !emptyBox) {                                                              // Ensure required elements exist
         console.error("wishlist.js: Missing #wishlist-list or #wishlist-empty in HTML.");
         return;
     }
-    if (!window.Wishlist || !window.NOP_DATA) {
+    if (!window.Wishlist || !window.NOP_DATA) {                                                 // Ensure dependencies are loaded (Wishlist.js and utils.js))
         console.error("wishlist.js: utils.js not loaded (Wishlist / NOP_DATA missing).");
         return;
     }
 
-    // Normalizing image path for pages/*.html
+    // IMAGE PATH NORMALIZATION
     function normalizeImgPath(p) {
         if (!p) return "";
-        if (/^(?:\.\.\/|\/|https?:\/\/)/i.test(p)) return p;
-        return "../" + p.replace(/^\.?\/*/, "");
+        if (/^(?:\.\.\/|\/|https?:\/\/)/i.test(p)) return p;                                    // Already absolute path or URL
+        return "../" + p.replace(/^\.?\/*/, "");                                                // prefix "../" to correctly resolve the image path
     }
 
+    // CARD TEMPLATE GENERATOR
+    // Returns HTML string for a wishlist item card
+    // This function returns the HTML markup for a single wishlist card.
+    // It does not touch the DOM directly; it only generates a string.
     function cardHtml(item) {
         return `
       <article class="col-12 col-md-6 col-lg-4 wishlist-card" data-id="${item.id}">
@@ -45,26 +49,34 @@
     `;
     }
 
+    // MAIN RENDER FUNCTION
+    // This function reads the wishlist state and updates the UI accordingly.
     function render() {
-        const savedIds = window.Wishlist.getAll();
-        if (!savedIds.length) {
+        const savedIds = window.Wishlist.getAll();                                      // Get all saved wishlist item IDs
+        if (!savedIds.length) {                                                         // If wishlist is empty, show placeholder
             listBox.innerHTML = "";
             emptyBox.style.display = "block";
             return;
         }
-        emptyBox.style.display = "none";
+        emptyBox.style.display = "none";                                                // Hide placeholder
+
+        // Build the wishlist cards:
+        // Map each ID to its data object
+        // Filter out missing data
+        // Convert each item to HTML
+        // Join into one string
         const html = savedIds
             .map((id) => window.NOP_DATA[id])
             .filter(Boolean)
             .map(cardHtml)
             .join("");
+        listBox.innerHTML = html;                                                       // Update the DOM with the generated HTML
 
-        listBox.innerHTML = html;
-
-        // Remove buttons
+        // REMOVE BUTTON HANDLERS
+        // Attach click event listeners to each remove buttons
         listBox.querySelectorAll(".removeBtn").forEach((btn) => {
             btn.addEventListener("click", () => {
-                const article = btn.closest("article");
+                const article = btn.closest("article");                                 // Find the closest article element (the card)
                 const id = article.dataset.id;
 
                 // If jQuery is available, animate removal
@@ -72,25 +84,23 @@
                     const $ = window.jQuery;
                     $(article).fadeOut(200, function () {
                         window.Wishlist.remove(id);
-                        render();
+                        render();                                                       // Re-render the wishlist after removal
                     });
                 } else {
-                    // Fallback: no animation
+                    // Fallback: remove immediately without animation
                     window.Wishlist.remove(id);
                     render();
                 }
             });
         });
 
-        // jQuery: fade-in effect for cards + hover shadow
+        // jQUERY UI EFFECTS
         if (window.jQuery) {
             const $ = window.jQuery;
-
-            const $cards = $("#wishlist-list .wishlist-card");
+            const $cards = $("#wishlist-list .wishlist-card");                          // Fade-in animation for wishlist cards
             $cards.hide().each(function (i) {
                 $(this).delay(i * 150).fadeIn(250);
             });
-
             // Hover: stronger shadow on the inner .card
             $("#wishlist-list").on("mouseenter", ".card", function () {
                 $(this).addClass("shadow-lg");
@@ -99,6 +109,5 @@
             });
         }
     }
-
-    render();
+    render();                                                                           // Initial render on script load
 })();
